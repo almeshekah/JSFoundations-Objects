@@ -44,7 +44,7 @@ function channelHasVideo(videoTitle, channel) {
   
   //return channel.videos.filter((arrayElement) => arrayElement['title'] === videoTitle);
 
-  return channel["videos"].some((video) => channel.videos[0].title === videoTitle);
+  return channel["videos"].some((video) => video.title.toLowerCase() === videoTitle.toLowerCase());
   //let res = channel.some(fidcc());
   //function fidcc (ch){
     //return ch.videos[0].title === channelName;
@@ -77,12 +77,14 @@ function channelHasVideo(videoTitle, channel) {
  ****************************************************************/
 function getChannelByName(channelName, channels) {
   // Your code here
-  //return channels.find((name) => channels.name === channelName);
-  let res = channels.find(fidcc);
+  return channels.find((channel)=> channel.name === channelName);
+
+
+ /* let res = channels.find(fidcc);
   function fidcc (channel){
     return channel.name === channelName;
-  }
-  return res;
+ }
+  return res;*/
 }
 //console.log(getChannelByName("PowerfulJRE", channels));
 
@@ -96,12 +98,12 @@ function getChannelByName(channelName, channels) {
  ****************************************************************/
 function getChannelByVideoTitle(videoTitle, channels) {
   // Your code here
-  
-  let res = channels.find(fidcc);
+  return channels.find((channel)=>channelHasVideo(videoTitle,channel));
+  /*let res = channels.find(fidcc);
   function fidcc (channel){
    //return  channel["videos"].some((video) => channel.videos[0].title === videoTitle);
   }
-  return res;
+  return res;*/
 }
 //console.log(channelHasVideo("The Universal S", channels));
 
@@ -115,9 +117,10 @@ function getChannelByVideoTitle(videoTitle, channels) {
  ****************************************************************/
 function searchChannels(query, channels) {
   // Your code here
-  return channels.filter((channel) => channel.name.includes(query));
+  return channels.filter((channel) =>channel.description.includes(query)|| channel.name.includes(query));
+  
 }
-// console.log(searchChannels("the", channels))
+ //console.log(searchChannels("the", channels))
 
 module.exports = {
   getChannelName,
